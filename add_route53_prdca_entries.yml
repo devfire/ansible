@@ -1,0 +1,21 @@
+---
+- name: Create the R53 entries
+  hosts: localhost
+  gather_facts: False
+  tasks:
+  - route53:
+      command: create
+      zone: pf-labs.net
+      record: "{{ item }}"
+      type: CNAME
+      value: "internal-API-2223333.ca-central-1.elb.amazonaws.com"
+      alias_hosted_zone_id: "{{ zone_id }}"
+    with_items:
+        - audit.pf-labs.net
+        - branding.pf-labs.net
+        - customer.pf-labs.net
+        - feature.pf-labs.net
+        - identity.pf-labs.net
+        - messenger.pf-labs.net
+        - navigation.pf-labs.net
+        - notification.pf-labs.net
