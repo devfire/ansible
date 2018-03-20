@@ -1,0 +1,17 @@
+---
+- hosts: '{{ hosts }}'
+  become: yes
+  gather_facts: False
+
+  tasks:
+  - name: Copy out mms rpm to server
+    copy: src=./new/mongodb-mms-monitoring-agent-5.6.0.364-1.x86_64.rpm dest=/tmp/mongodb-mms-monitoring-agent-5.6.0.364-1.x86_64.rpm
+
+  - name: Install Mongo MMS Monitor
+    yum: name=/tmp/mongodb-mms-monitoring-agent-5.6.0.364-1.x86_64.rpm state=installed
+
+  - name: Copy out MMS config
+    copy: src=./new/mongo-monitoring-agent.config dest=/etc/mongodb-mms/monitoring-agent.config
+
+  - name: Start monitoring agent
+    service: name=mongodb-mms-monitoring-agent state=started enabled=yes
