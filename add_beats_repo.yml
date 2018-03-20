@@ -1,0 +1,8 @@
+---
+- hosts: '{{ hosts }}'
+  become: yes
+  yum_repository:
+    name: elastic repo
+    description: elastic yum repo
+    baseurl: https://artifacts.elastic.co/packages/5.x/yum
+    gpgkey: https://packages.elastic.co/GPG-KEY-elasticsearch
