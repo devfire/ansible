@@ -1,0 +1,6 @@
+---
+- hosts: '{{ hosts }}'
+  become: yes
+  tasks:
+    - name: push a new '{{src_file}}' to '{{dest_file}}'
+      copy: src={{src_file}} dest={{dest_file}}
